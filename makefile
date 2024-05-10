@@ -1,6 +1,6 @@
 CC = g++
-
-FLAGS = -w -Wl,-subsystem,windows -lOpenGL32 -lglu32 -lfreeGLUT -lSDL2main -lmingw32 -lSDL2
+ 
+FLAGS = -lOpenGL32 -lglu32 -lSDL2 -lmingw32 -lSDL2_ttf -lSDL2_image
 
 INCLUDE = -I./includes
 
@@ -12,7 +12,7 @@ INPUT = source/main.cpp
 all: compile run
 
 compile:
-	$(CC) $(INPUT) -o $(OUTPUT) $(FLAGS) $(INCLUDE) $(LIBS)
+	@$(CC) $(INPUT) -o $(OUTPUT) $(FLAGS) $(INCLUDE) $(LIBS)
 
 run:
 	@cd build/ && app.exe

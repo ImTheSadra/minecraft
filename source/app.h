@@ -1,13 +1,12 @@
 #include <SDL2/SDL.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
+#include <iostream>
 
 #include "world.h"
 
 const int WIDTH = 800;
 const int HEIGHT = 600;
-
-// float angle = 0.0;
 
 class App{
 private:
@@ -16,15 +15,18 @@ private:
 public:
     SDL_Window* window;
     SDL_GLContext context;
+    SDL_Renderer* renderer;
     bool running = true;
     App(){
         this->window = SDL_CreateWindow(
-            "TEST", 
+            "Minecraft - Sadra In The Box", 
             SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED,
-            WIDTH, HEIGHT, SDL_WINDOW_OPENGL
+            WIDTH, HEIGHT, 
+            SDL_WINDOW_OPENGL|SDL_WINDOW_SHOWN
         );
         this->context = SDL_GL_CreateContext(this->window);
+        this->renderer = SDL_CreateRenderer(this->window, -1, 0);
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -35,6 +37,7 @@ public:
 
         glMatrixMode(GL_MODELVIEW);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_2D);
     }
 
     void draw(){
@@ -53,8 +56,11 @@ public:
             player.checkEvent(event);
         }
 
-        // angle += 0.1;
-        // if (angle >= 360){angle = 0;}
+        if (this->player.pause){
+            SDL_SetWindowTitle(this->window, "Minecraft - Sadra In The Box [Paused]");
+        } else {
+            SDL_SetWindowTitle(this->window, "Minecraft - Sadra In The Box");
+        }
 
         SDL_Delay(5);
     }

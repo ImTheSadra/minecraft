@@ -1,3 +1,5 @@
+#include <windows.h>
+
 #include "app.h"
 
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd){
