@@ -37,3 +37,14 @@ int bindTexture(SDL_Surface* surf){
 
     return (int)result;
 }
+
+SDL_Texture* SDL_LoadTexture(string path){
+    SDL_Surface* s = IMG_Load(path.c_str());
+    return SDL_CreateTextureFromSurface(
+        SDL_CreateRenderer(SDL_GL_GetCurrentWindow(), -1, 0), s
+    );
+}
+
+int bindTextureSDL(SDL_Texture* texture){
+    return SDL_GL_BindTexture(texture, nullptr, nullptr);
+}

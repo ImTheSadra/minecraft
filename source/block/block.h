@@ -11,7 +11,6 @@ public:
     SDL_Surface* top;
     SDL_Surface* body;
     SDL_Surface* down;
-
     float size = 1.0;
 
     float pointmap[6][4][5]{
@@ -51,7 +50,6 @@ public:
     SDL_Surface* textures[6];
 
     Block(string name){
-
         stringstream tname;
         tname << "./assest/blocks/";
         tname << name;
@@ -62,31 +60,28 @@ public:
         bname << "./assest/blocks/";
         bname << name;
         bname << "/body.png";
-        this->body = IMG_Load(tname.str().c_str());
+        this->body = IMG_Load(bname.str().c_str());
 
         stringstream dname;
         dname << "./assest/blocks/";
         dname << name;
         dname << "/down.png";
-        this->down = IMG_Load(tname.str().c_str());
+        this->down = IMG_Load(dname.str().c_str());
 
-        this->textures[0] = this->top;
+        this->textures[0] = this->body;
         this->textures[1] = this->body;
         this->textures[2] = this->body;
         this->textures[3] = this->body;
-        this->textures[4] = this->body;
+        this->textures[4] = this->top;
         this->textures[5] = this->down;
     }
 
     void draw(float x, float y, float z){
         
-
         for(int i = 0; i < 6; i++){
-            int t = bindTexture(this->textures[i]);
-            glBindTexture(GL_TEXTURE_2D, t);
+            glBindTexture(GL_TEXTURE_2D, bindTexture(this->textures[i]));
             glBegin(GL_QUADS);
-            // cout << this->textures[0]->pixels << endl;
-            
+
             glVertexPointer(4, GL_FLOAT, 0, pointmap[i][0]);
             
             glTexCoord2f(0, 0);

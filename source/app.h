@@ -41,7 +41,7 @@ public:
     }
 
     void draw(){
-        glClearColor(0.3, 0.0, 0.3, 1.0);
+        glClearColor(0.0, 0.0, 0.3, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         this->world.draw(this->player);
@@ -62,7 +62,7 @@ public:
             SDL_SetWindowTitle(this->window, "Minecraft - Sadra In The Box");
         }
 
-        SDL_Delay(5);
+        SDL_Delay(16);
     }
 
     void run(){
@@ -73,6 +73,7 @@ public:
             this->draw();
         }
 
+        SDL_GL_DeleteContext(this->context);
         SDL_DestroyWindow(this->window);
         SDL_Quit();
     }
